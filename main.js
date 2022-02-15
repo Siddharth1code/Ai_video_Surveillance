@@ -10,10 +10,6 @@ function setup()
     canvas.center();
     video.hide();
 }
-function draw()
-{
-    image(video,0,0,450,380);
-}
 function start()
 {
     objectDectector=ml5.objectDectector('cocossd',modelLoaded);
@@ -26,4 +22,28 @@ function modelLoaded()
     video.loop();
     video.speed(1);
     video.volume(0);
+}
+function draw()
+{
+    image(video,0,0,450,380);
+
+    if(status!="")
+{
+    r=random(255);
+    g=random(255);
+    b=random(255);
+    objectDetector.detect(video,gotResults);
+    
+    for(i=0;i<object.length;i++)
+    {
+        document.getElementById("status").innerHTML="Status: Object detected";
+        document.getElementById("number_of_object").innerHTML="Number of person detected are "+object.length;
+        fill(r,g,b);
+        peresent=floor(object[i].confidence*100);
+        text(object[i].label+" "+peresent+" % ",object[i].x+ 15, object[i].y + 15);
+        noFill();
+        stroke(r,g,b);
+        rect(object[i].x ,object[i].y , object[i].width ,object[i].height);
+    }
+}
 }

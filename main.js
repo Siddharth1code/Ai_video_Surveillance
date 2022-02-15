@@ -1,5 +1,5 @@
-video="";
 status="";
+object=[];
 function perload()
 {
     video=createVideo('video.mp4');
@@ -22,6 +22,15 @@ function modelLoaded()
     video.loop();
     video.speed(1);
     video.volume(0);
+}
+function gotResults(error,results)
+{
+     if(error)
+    {
+        console.log("error");
+    }
+    console.log(results);
+    object=results;
 }
 function draw()
 {
